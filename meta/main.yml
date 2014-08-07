@@ -1,0 +1,16 @@
+---
+galaxy_info:
+  author: Kamil Chmielewski
+  description: Deploy and run Java app as fatjar
+  company: Grupa Allegro Sp. z o.o.
+  license: Apache
+  min_ansible_version: 1.4
+  platforms:
+  - name: Ubuntu
+    versions:
+    - trusty
+  categories:
+  - cloud
+  - development
+  - packaging
+

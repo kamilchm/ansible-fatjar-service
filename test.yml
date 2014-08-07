@@ -1,0 +1,8 @@
+---
+- hosts: default
+  vars:
+    - service_name: fat
+    - service_version: 0.1.0
+    - service_port: 8080
+  roles:
+    - role: .

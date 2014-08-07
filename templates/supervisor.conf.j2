@@ -1,0 +1,20 @@
+[program:{{ service_name }}]
+command=java -jar {{ service_jar }}
+numprocs=1
+directory={{ service_dir }}
+umask=022
+autostart=true
+autorestart=true
+startsecs=60
+startretries=3
+user={{ ansible_user_id }}
+redirect_stderr=true
+stdout_logfile=/var/log/supervisor/{{ service_name }}.log
+stdout_logfile_maxbytes=100MB
+stdout_logfile_backups=10
+stdout_capture_maxbytes=100MB
+stderr_logfile=/var/log/supervisor/{{ service_name }}_stderr.log
+stderr_logfile_maxbytes=100MB
+stderr_logfile_backups=10
+stderr_capture_maxbytes=100MB
+environment=PORT="{{ service_port }}"

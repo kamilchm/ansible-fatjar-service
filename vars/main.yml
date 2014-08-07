@@ -1,0 +1,6 @@
+---
+
+service_dir: "/opt/services/{{ service_name }}"
+service_jar: "{{service_dir}}/{{ service_name }}-{{ service_version }}.jar"
+dist_dir: .
+source_jar: "{{ dist_dir }}/{{ service_name }}-{{ service_version }}.jar"

@@ -1,0 +1,33 @@
+---
+# tasks file for fatjar
+
+- name: Setup oracle java deb repo
+  apt_repository: repo="ppa:webupd8team/java" update_cache=yes
+  
+- name: Accept Oracle license
+  debconf: name="oracle-java8-installer" question='shared/accepted-oracle-license-v1-1' value='true' vtype='select'
+  
+- name: Install Java8 package
+  apt: name=oracle-java8-installer state=present
+  
+- name: Set java default
+  apt: name=oracle-java8-set-default state=present
+
+- name: Install Supervisor
+  apt: name=supervisor state=present
+
+- name: Prepare service directory
+  file: path={{ service_dir }} state=directory
+
+- name: Put service fatJar to server
+  copy: src={{ source_jar }} dest={{ service_jar }}
+  notify:
+    - restart service
+
+- name: Configure service supervisor
+  template: src=supervisor.conf.j2 dest=/etc/supervisor/conf.d/{{service_name}}.conf
+  notify:
+    - restart service
+
+- name: Make sure our service is running
+  command: sudo supervisorctl start {{ service_name }}
